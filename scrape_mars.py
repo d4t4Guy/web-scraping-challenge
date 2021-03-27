@@ -21,5 +21,7 @@ browser.quit()
 #use bs4 to parse the title and paragraph
 soup=BeautifulSoup(html, 'html.parser') #returns a soup object
 news_title = soup.find('h3', class_='').text #works correctly 2021-03-17.
-# Observation that most recent news article headline is under the first 
-# <h3> tag with no CSS class assigned
+news_paragraph =soup.find('li', class_='slide') \
+                    .find('div', class_="article_teaser_body").text
+
+print(f'{news_title} \n {news_paragraph}')

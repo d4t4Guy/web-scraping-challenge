@@ -22,18 +22,21 @@ executable_path = {'executable_path':ChromeDriverManager().install()}  #To-do: c
 #set up browser
 browser = Browser('chrome', **executable_path, headless=False)
 browser.visit(target_url)
-
-#scrape most recent news article
-news_path = 'https://mars.nasa.gov/news/'
-browser.visit(news_path)
 time.sleep(3) #wait for Browser to render JS
 html = browser.html
 browser.quit()
+return BeautifulSoup(html, 'html.parser')
+#############################################
 
-#use bs4 to parse the title and paragraph
-soup=BeautifulSoup(html, 'html.parser') #returns a soup object
+#function to get news article teaser
+def parse_news(soup)
 news_title = soup.find('h3', class_='').text #works correctly 2021-03-17.
 news_paragraph =soup.find('li', class_='slide') \
                     .find('div', class_="article_teaser_body").text
+return (f'{news_title} \n {news_paragraph}')
+#############################################
 
-print(f'{news_title} \n {news_paragraph}')
+#using fns to pull info
+soup = scrape_url(news_path)
+teaser = parse_news(soup)
+print(teaser)
