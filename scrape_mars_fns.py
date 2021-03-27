@@ -13,6 +13,12 @@ news_path = 'https://mars.nasa.gov/news/' #scrape most recent news article
 gallery_url = 'https://www.jpl.nasa.gov/images?search=&category=Mars' #get link for photo
 JPL_base_url = 'https://www.jpl.nasa.gov' #root URL related to link for photo
 mars_facts_url = 'https://www.space-facts.com/mars/' #table
+hemisphere_image_urls = [
+    {"title": "Valles Marineris Hemisphere", "img_url": "https://astropedia.astrogeology.usgs.gov/download/Mars/Viking/valles_marineris_enhanced.tif/full.jpg"},
+    {"title": "Cerberus Hemisphere", "img_url": "https://astropedia.astrogeology.usgs.gov/download/Mars/Viking/cerberus_enhanced.tif/full.jpg"},
+    {"title": "Schiaparelli Hemisphere", "img_url": "https://astropedia.astrogeology.usgs.gov/download/Mars/Viking/schiaparelli_enhanced.tif/full.jpg"},
+    {"title": "Syrtis Major Hemisphere", "img_url": "https://astropedia.astrogeology.usgs.gov/download/Mars/Viking/syrtis_major_enhanced.tif/full.jpg"},
+    ]
 
 
 #fn to return bs4 soup object from a target URL. 
@@ -70,16 +76,18 @@ def parse_facts(soup):
 
 	df = pd.DataFrame({'Mars':points}, index=labels)
 	html_table = df.to_html()
+	return html_table
 
 
-
-#using fns to pull news
-soup = scrape_url(news_path)
-headline_teaser = parse_news(soup)
-#Get URL for current photo from gallery
-soup = scrape_url(gallery_url)
-top_photo_url = parse_gallery(soup)
-soup = scrape_url(top_photo_url)
-featured_image_url = parse_featured_image(soup)
-#get mars facts for table
-soup = scrape_url(mars_facts_url)
+def scrape()
+	#using fns to pull news
+	soup = scrape_url(news_path)
+	headline_teaser = parse_news(soup)
+	#Get URL for current photo from gallery
+	soup = scrape_url(gallery_url)
+	top_photo_url = parse_gallery(soup)
+	soup = scrape_url(top_photo_url)
+	featured_image_url = parse_featured_image(soup)
+	#get mars facts for table
+	soup = scrape_url(mars_facts_url)
+	table = parse_facts(soup)
