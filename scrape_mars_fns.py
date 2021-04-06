@@ -41,7 +41,7 @@ def parse_news(soup):
 	news_title = soup.find('h3', class_='').text #works correctly 2021-03-17.
 	news_paragraph =soup.find('li', class_='slide') \
 	                    .find('div', class_="article_teaser_body").text
-	return (f'{news_title} \n {news_paragraph}')
+	return news_title, news_paragraph
 #############################################
 
 #function to parse gallery soup to get URL for full-size image. returns URL as a string
@@ -82,7 +82,7 @@ def parse_facts(soup):
 def scrape()
 	#using fns to pull news
 	soup = scrape_url(news_path)
-	headline_teaser = parse_news(soup)
+	news_headline, news_teaser = parse_news(soup)
 	#Get URL for current photo from gallery
 	soup = scrape_url(gallery_url)
 	top_photo_url = parse_gallery(soup)
@@ -91,3 +91,14 @@ def scrape()
 	#get mars facts for table
 	soup = scrape_url(mars_facts_url)
 	table = parse_facts(soup)
+#loading vars into dict. Could probably have boiled down to fewer steps, but breaking out for readability
+	scrape_dict = {}
+	scrape_dict['news_headline'] = news_headline
+	scrape_dict['news_teaser']   = news_teaser
+	scrape_dict['featured_image_url'] = featured_image_url
+	scrape_dict['html_table'] = html_table
+	scrape_dict['hemisphere_image_urls'] = hemisphere_image_urls
+#need fn to call from app.py
+#create new dict
+#news_headline: call fn that pulls headline, etc. return dict with keys and values
+#leet code
