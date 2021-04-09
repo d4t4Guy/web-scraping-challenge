@@ -79,7 +79,7 @@ def parse_facts(soup):
 	return html_table
 
 
-def scrape()
+def scrape():
 	#using fns to pull news
 	soup = scrape_url(news_path)
 	news_headline, news_teaser = parse_news(soup)
@@ -90,7 +90,7 @@ def scrape()
 	featured_image_url = parse_featured_image(soup)
 	#get mars facts for table
 	soup = scrape_url(mars_facts_url)
-	table = parse_facts(soup)
+	html_table = parse_facts(soup)
 #loading vars into dict. Could probably have boiled down to fewer steps, but breaking out for readability
 	scrape_dict = {}
 	scrape_dict['news_headline'] = news_headline
@@ -98,3 +98,4 @@ def scrape()
 	scrape_dict['featured_image_url'] = featured_image_url
 	scrape_dict['html_table'] = html_table
 	scrape_dict['hemisphere_image_urls'] = hemisphere_image_urls
+	return scrape_dict
