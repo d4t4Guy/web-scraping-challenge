@@ -18,13 +18,25 @@
     </div>
 
   
-    <div class="row" id="c">
+    <div class="row">
       <div class="col-md-12">
-        <h4 class="heading">Latest Mars News</h4>
-
+        <h3 class="heading">Latest Mars News</h3>
         <small>{{scrape_dict.news_headline}}</small>
       </div>
     </div>
+    <div class="row">
+      <div class="col-md-8">
+       <h4 class="heading">Featured Mars Image</h4>
+        <img src={{scrape_dict.featured_image_url}} alt="Featured Image" width="600" height="400">
+      </div>
+      <div class="col-md-4">
+        {{scrape_dict.html_table | safe}}
+      </div>
+    </div>
+
+
+
+
 
   </div>
 </body>
