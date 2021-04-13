@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Mission to Mars</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <style> h3 {text-align: center;}</style>
 </head>
 
 <body>
@@ -17,28 +18,56 @@
       <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
     </div>
 
+{% block content %}
+    {% if code == 302 %}
+        <div class="row">
+          <div class="col-md-12">
+            <h2 class="heading">Latest Mars News</h2>
+            <small>{{scrape_dict.news_headline}}</small>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-8">
+          <h4 class="heading">Featured Mars Image</h4>
+            <img src={{scrape_dict.featured_image_url}} alt="Featured Image" width="600" height="400">
+          </div>
+          <div class="col-md-4">
+            {{scrape_dict.html_table | safe}}  <!--safe option required to render HTML from dict into table-->
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+          <h3 class="heading">Mars Hemispheres</h3>
+          </div>
+        </div>
+
+      <div class = "container">
+        
+        <div class="row">  
+          <div class="col-md-6">
+            <img src={{scrape_dict.hemisphere_image_urls.0.img_url}}  class="img-responsive" alt = "Valles Marineris Hemisphere">
+          </div>
+          <div class="col-md-6">
+            <img src={{scrape_dict.hemisphere_image_urls.1.img_url}} class="img-responsive" alt = "Cerberus Hemisphere">
+          </div>
+        </div>
+
+        <div class="row">  
+          <div class="col-md-6">
+            <img src={{scrape_dict.hemisphere_image_urls.2.img_url}} class="img-responsive" alt = "Schiaparelli Hemisphere">
+          </div>
+          <div class="col-md-6">
+            <img src={{scrape_dict.hemisphere_image_urls.3.img_url}} class="img-responsive" alt = "Syrtis Major Hemisphere">
+          </div>
+        </div> 
+      
+      </div> 
   
-    <div class="row">
-      <div class="col-md-12">
-        <h3 class="heading">Latest Mars News</h3>
-        <small>{{scrape_dict.news_headline}}</small>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-8">
-       <h4 class="heading">Featured Mars Image</h4>
-        <img src={{scrape_dict.featured_image_url}} alt="Featured Image" width="600" height="400">
-      </div>
-      <div class="col-md-4">
-        {{scrape_dict.html_table | safe}}
-      </div>
-    </div>
-
-
-
-
-
-  </div>
+      {% endif %}
+{% endblock content %} 
+</div>
 </body>
 
 </html>
