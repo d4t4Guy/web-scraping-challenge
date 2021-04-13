@@ -18,12 +18,11 @@
       <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
     </div>
 
-{% block content %}
-    {% if code == 302 %}
         <div class="row">
           <div class="col-md-12">
             <h2 class="heading">Latest Mars News</h2>
-            <small>{{scrape_dict.news_headline}}</small>
+            <h4>{{scrape_dict.news_headline}}</h4>
+            {{scrape_dict.news_teaser}}
           </div>
         </div>
 
@@ -64,9 +63,7 @@
         </div> 
       
       </div> 
-  
-      {% endif %}
-{% endblock content %} 
+
 </div>
 </body>
 
